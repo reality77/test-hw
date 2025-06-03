@@ -29,6 +29,8 @@ public class FranceTravailApiClient(HttpClient httpClient,
     {
         // TODO : Dans l'idéal, ajouter une trace de télémétrie (span) pour notamment mesurer le temps de réponse de l'API.
 
+        // TODO : Gérer la pagination si nécessaire
+
         var accessToken = await _franceTravailOAuthApi.GetAccessToken();
         _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
@@ -41,8 +43,6 @@ public class FranceTravailApiClient(HttpClient httpClient,
                 response.StatusCode, await response.Content.ReadAsStringAsync());
             throw new HttpRequestException($"Failed to retrieve job offers: {response.ReasonPhrase}");
         }
-
-        await File.WriteAllTextAsync("./result.json", response.Content.ReadAsStringAsync().Result);
 
         return await response.Content.ReadFromJsonAsync<ResultatOffres>(_jsonSerializerOptions)
             ?? throw new InvalidOperationException("Failed to deserialize response from France Travail API.");

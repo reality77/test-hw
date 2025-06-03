@@ -15,13 +15,14 @@ public class FranceTravailJobOfferRetrieverRepository(FranceTravailApiClient fra
         return result.Resultats.Select(offer => new JobOfferModel
         {
             Source = JobOfferSources.FranceTravail,
-            Id = offer.Id,
+            ExternalId = offer.Id,
             Title = offer.Intitule,
             Description = offer.Description,
             ApplyUrl = offer.Contact?.UrlPostulation,
             Location = offer.LieuTravail?.Libelle,
             CompanyName = offer.Entreprise?.Nom,
             PostedAt = offer.DateCreation,
+            ContractType = offer.TypeContrat,
         });
     }
 }

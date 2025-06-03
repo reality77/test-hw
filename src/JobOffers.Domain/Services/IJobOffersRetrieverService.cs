@@ -1,11 +1,13 @@
 namespace JobOffers.Domain.Services;
 
+/// <summary>
+/// Interface for a service that retrieves job offers from various sources.
+/// </summary>
 public interface IJobOffersRetrieverService
 {
     /// <summary>
-    /// Retrieves job offers from the specified source.
+    /// Retrieves job offers from the specified source and store them in the data store.
     /// </summary>
-    /// <param name="source">The source from which to retrieve job offers.</param>
     /// <returns>A list of job offers.</returns>
     Task RetrieveJobOffersAsync();
 }

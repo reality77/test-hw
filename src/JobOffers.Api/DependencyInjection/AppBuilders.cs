@@ -1,5 +1,6 @@
 using JobOffers.Domain.Models;
 using JobOffers.Domain.Repositories;
+using JobOffers.Infrastructure.DataContext;
 using JobOffers.Infrastructure.Repositories;
 using JobOffers.Infrastructure.Repositories.FranceTravail;
 
@@ -12,17 +13,15 @@ public static class AppBuilders
     /// </summary>
     /// <param name="services">Service collection</param>
     /// <returns>Updated service collection</returns>
-    public static IServiceCollection AddDataLayer(this IServiceCollection services)
+    public static IServiceCollection AddDataLayer(this IServiceCollection services, IConfiguration configuration)
     {
-        /*var npgsqlDataSource = ExpensesDbContext.CreateDataSource(services.BuildServiceProvider().GetRequiredService<IConfiguration>());
-
-        services.AddDbContext<ExpensesDbContext>(options =>
+        services.AddDbContext<JobOffersDbContext>(options =>
         {
-            ExpensesDbContext.SetDbContextOptionsBuilder(options, npgsqlDataSource);
+            JobOffersDbContext.SetDbContextOptionsBuilder(options, configuration);
         });
 
-        services.AddScoped<IExpensesRepository, ExpensesDataRepository>();
-        */
+        services.AddScoped<IJobOffersDataRepository, JobOffersDataRepository>();
+
         return services;
     }
 

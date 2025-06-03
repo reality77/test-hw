@@ -47,6 +47,11 @@ public record Offre
     /// Gets or sets the date when the job offer was created.
     /// </summary>
     public DateTime? DateCreation { get; set; }
+
+    /// <summary>
+    /// Gets or sets the type of contract for the job offer (e.g., CDI, CDD, ...).
+    /// </summary>
+    public string? TypeContrat { get; set; }
 }
 
 public record LieuTravail
